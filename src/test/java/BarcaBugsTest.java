@@ -67,4 +67,16 @@ class BarcaBugsTest {
         assertEquals(0, barcaBugs.ocupaLugar("F03Af9"));
         assertEquals(0, barcaBugs.ocupaLugar("F09A1a"));
     }
+
+    /*
+    -Testar se o usuário colocar um assento que ja esta ocupado.
+    [F01A18]
+    [F01A18]
+    */
+    @org.junit.jupiter.api.Test
+    void test_assento_ocupado() {
+        BarcaBugs barcaBugs = new BarcaBugs();
+        assertEquals(3, barcaBugs.ocupaLugar("F01A18"));
+        assertEquals(1, barcaBugs.ocupaLugar("F01A18"));
+    }
 }
