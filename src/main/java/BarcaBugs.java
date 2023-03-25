@@ -4,7 +4,7 @@ public class BarcaBugs {
     public static final int ASSENTOS_POR_FILA = 20;
     public static final int FILAS = 60;
     private boolean[][] assentos;
-    private int qtdadeAssentosOcupados;
+    public int qtdadeAssentosOcupados;
 
     public BarcaBugs(){
         assentos = new boolean[FILAS][];
@@ -31,11 +31,11 @@ public class BarcaBugs {
      */
     public int ocupaLugar(String assentoInformado){
         // Verifica se é um assento valido
-        if (Pattern.matches("[F][0-8]{2}[A][0-8]{2}", assentoInformado) == false){
+        if (Pattern.matches("[F][0-9]{2}[A][0-9]{2}", assentoInformado) == false){
             return 0;
         }
-        int fila = Integer.parseInt(assentoInformado.substring(1,3));
-        int assento = Integer.parseInt(assentoInformado.substring(4,6));
+        int fila = Integer.parseInt(assentoInformado.substring(1,3)) - 1;
+        int assento = Integer.parseInt(assentoInformado.substring(4,6)) - 1;
         if (fila<0 || fila > 60){
             return 0;
         }
