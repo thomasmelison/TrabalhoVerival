@@ -36,10 +36,10 @@ public class BarcaBugs {
         }
         int fila = Integer.parseInt(assentoInformado.substring(1,3));
         int assento = Integer.parseInt(assentoInformado.substring(4,6));
-        if (fila < 1 || fila >= 60){
+        if (fila < 1 || fila > 60){
             return 0;
         }
-        if (assento < 1 || assento >= 20){
+        if (assento < 1 || assento > 20){
             return 0;
         }
         // Verifica se o assento já não está ocupado
