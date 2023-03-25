@@ -5,37 +5,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class BarcaBugsTest {
 
 
+
     /*
     -Testar se o usuário colocar uma fileira maior que 60.
     [F80A18]
      */
-    @org.junit.jupiter.api.Test
-    void test_centesimo_primeiro_passageiro() {
-        BarcaBugs barcaBugs = new BarcaBugs();
-
-        for(int fileira = 0 ; fileira <= 4 ; fileira++){
-            for(int assento = 0; assento <=19 ; assento++ ){
-                barcaBugs.ocupaLugar(fileira,assento);
-            }
-        }
-        System.out.println(barcaBugs.qtdadeAssentosOcupados);
-        int resultado = barcaBugs.ocupaLugar("F50A01");
-        System.out.println(barcaBugs.qtdadeAssentosOcupados);
-        assertEquals(3, resultado);
-    }
-
-    /*
-    Se o primeiro usuário adiciona dentro do intervalo F[1-20], não precisa
-    testar assento por que pode ser qualquer um dentro do intervalo valido.
-    Input: [F01A01]
-     */
-    @org.junit.jupiter.api.Test
-    void test_primeiro_passageiro() {
-        BarcaBugs barcaBugs = new BarcaBugs();
-
-        assertEquals(3, barcaBugs.ocupaLugar("F41A19"));
-    
-    }
     void test_fileira_maior_que_60() {
         BarcaBugs barcaBugs = new BarcaBugs();
         assertEquals(0, barcaBugs.ocupaLugar("F80A18"));
@@ -113,8 +87,7 @@ class BarcaBugsTest {
 
     /*
     Se nos 100 primeiros passageiros adicionamos fora do intervalo
-    onde a fileira vai de 0 a 20 ,não precisa testar assento pq
-    já está no "retorna 0" (sem incluir zero).
+    onde a fileira vai de 1 a 20 retorna 2.
     Input: F50A10
      */
     @org.junit.jupiter.api.Test
@@ -126,22 +99,55 @@ class BarcaBugsTest {
 
     /*
     Se, depois de acionar 100 usuários corretamente, adicionamos um fora
-    do intervalo de fileiras 40 a 60,não precisa testar assento pq
-    já está no "retorna 0".
-    Input: F[0-20]A[0-20] + F21A01
+    do intervalo de fileiras 40 a 60, retorna 2.
+    Input: F[0-20]A[0-20] + F30A01
      */
     @org.junit.jupiter.api.Test
     void test_centesimo_primeiro_passageiro_escolhe_assento_desbalanceado() {
         BarcaBugs barcaBugs = new BarcaBugs();
-        int soma = 0;
-        for(int fileira = 0 ; fileira <= 4 ; fileira++){
-            for(int assento = 0; assento <=19 ; assento++ ){
+        for(int fileira = 1 ; fileira <= 5 ; fileira++){
+            for(int assento = 0; assento < 20 ; assento++ ){
                 barcaBugs.ocupaLugar(fileira,assento);
             }
         }
-        System.out.println(barcaBugs.qtdadeAssentosOcupados);
+        barcaBugs.ocupaLugar(20,19);
         assertEquals(2, barcaBugs.ocupaLugar("F30A01"));
     }
+
+
+
+
+    // Se o 101º usuário adiciona dentro do intervalo F[40-60]
+    // retorna 3.
+    // Input: F[0-20]A[0-20] + F50A01
+    @org.junit.jupiter.api.Test
+    void test_centesimo_primeiro_passageiro() {
+        BarcaBugs barcaBugs = new BarcaBugs();
+
+        for(int fileira = 0 ; fileira <= 4 ; fileira++){
+            for(int assento = 0; assento <=19 ; assento ++ ){
+                barcaBugs.ocupaLugar(fileira,assento);
+            }
+        }
+        assertEquals(3, barcaBugs.ocupaLugar("F50A01"));
+    }
+
+    /*
+    Se o primeiro usuário adiciona dentro do intervalo F[1-20],
+    Input : F15A15
+     */
+    @org.junit.jupiter.api.Test
+    void test_primeiro_passageiro() {
+        BarcaBugs barcaBugs = new BarcaBugs();
+
+        assertEquals(3, barcaBugs.ocupaLugar("F15A15"));
+
+    }
+
+   
+
+
+
 
 
 }
